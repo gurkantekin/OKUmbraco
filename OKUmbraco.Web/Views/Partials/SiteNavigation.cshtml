@@ -1,0 +1,24 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@{
+    <!--Home is the document type and model builder is getting this document type all property to homePage variable-->
+    var homePage = Model.AncestorOrSelf<Home>();
+}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="@homePage.Url">@homePage.Name</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <!--Getting all allowed child node-->
+                    @foreach (var page in homePage.Children)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@page.Url">@page.Name</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
